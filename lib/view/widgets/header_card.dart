@@ -36,7 +36,14 @@ class HeadCard extends StatelessWidget {
                   ),
                 ],
               ),
-              Text('\$ $amount'),
+              Text(
+                '\$ ${amount.toStringAsFixed(2)}',
+                style: textTheme.bodySmall?.copyWith(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
             ],
           ),
         ),

@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:money_tracker/controller/transactions_provider.dart';
 import 'package:money_tracker/view/widgets/header_card.dart';
+import 'package:provider/provider.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<TransactionsProvider>(context);
+    final income = provider.totalIncome;
+    final expense = provider.totalExpense;
+    final balance = provider.balance;
+
     final textTheme = Theme.of(context).textTheme;
     return Container(
       height: 250,
@@ -29,7 +36,7 @@ class HomeHeader extends StatelessWidget {
             ),
           ),
           Text(
-            'Balnace',
+            '\$ ${balance.toStringAsFixed(2)}',
             style: textTheme.bodySmall?.copyWith(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -50,14 +57,14 @@ class HomeHeader extends StatelessWidget {
             child: Row(
               children: [
                 HeadCard(
-                  title: 'Income',
-                  amount: 0.00,
+                  title: 'income',
+                  amount: income,
                   icon: const Icon(Icons.arrow_circle_up),
                 ),
                 SizedBox(width: 10),
                 HeadCard(
                   title: 'Expense',
-                  amount: -0.00,
+                  amount: expense,
                   icon: const Icon(Icons.arrow_circle_down),
                 ),
               ],
